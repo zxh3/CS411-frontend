@@ -9,6 +9,7 @@ class Dishes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    console.log('[componentDidUpdate] @ Dishes.js');
     if (prevProps === this.props && isEqual(prevState, this.state)) {
       return;
     }
