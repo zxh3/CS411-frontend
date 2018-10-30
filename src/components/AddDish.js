@@ -1,15 +1,44 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import M from 'materialize-css';
 
 class AddDish extends Component {
   state = {
     dishName: "",
-    restaurantName: "",
     ingredients: ""
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
+    });
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    let dishName = this.state.dishName;
+    let ingredients = this.state.ingredients.split(',').map(x => x.trim());
+
+    if (dishName.length === 0 || this.state.ingredients.length === 0) {
+      M.toast({html: 'Fields cannot be empty'});
+      return;
+    } else {
+      axios.post('http://localhost:2018/addDish', {
+        dishName,
+        ingredients
+      })
+        .then(res => {
+          if (res.data.error) {
+            M.toast({html: res.data.error});
+          } else {
+            M.toast({html: "Success!"});
+          }
+        })
+        .catch(err => console.error(err));
+    }
+    this.setState({
+      dishName: "",
+      ingredients: ""
     });
   }
 
@@ -26,28 +55,23 @@ class AddDish extends Component {
           <div className="modal-content">
             <h3 className="red-text text-lighten-2">Create a new dish!</h3>
             <div className="row">
-              <form className="col s12">
+              <form className="col s12" onSubmit={this.handleSubmit}>
 
                 <div className="row">
                   <div className="input-field col s6">
-                    <input id="dishName" type="text" onChange={this.handleChange} value={this.state.dishName} />
+                    <input id="dishName" type="text" onChange={this.handleChange} value={this.state.dishName} autoComplete="off" />
                     <label htmlFor="dishName">Dish Name</label>
                   </div>
                 </div>
 
                 <div className="row">
                   <div className="input-field col s6">
-                    <input id="restaurantName" type="text" onChange={this.handleChange} value={this.state.restaurantName} />
-                    <label htmlFor="restaurantName">Restaurant Name</label>
+                    <input id="ingredients" type="text" onChange={this.handleChange} value={this.state.ingredients} autoComplete="off" />
+                    <label htmlFor="ingredients">Ingredients, separate by comma</label>
                   </div>
                 </div>
 
-                <div className="row">
-                  <div className="input-field col s6">
-                    <input id="ingredients" type="text" onChange={this.handleChange} value={this.state.ingredients} />
-                    <label htmlFor="ingredients">Ingredients, split by comma</label>
-                  </div>
-                </div>
+                <button className="btn red lighten-2">Submit</button>
 
               </form>
             </div>

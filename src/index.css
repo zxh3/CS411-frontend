@@ -12,3 +12,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.card-reveal{
+  color: #ffffff;
+  background-color: rgba(30,30,30,0.7) !important;
+}
+
+table.highlight>tbody>tr:hover{
+  background-color: rgba(238,110,115,0.6) !important;
+}
+
+td, th{
+  padding: 5px 5px !important;
+}
+
+th {
+  color: rgba(238,110,115,1.0) !important;
+}

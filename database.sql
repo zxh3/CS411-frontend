@@ -17,7 +17,7 @@ CREATE TABLE dishIngredient (
     dishName VARCHAR(255),
     ingredientName VARCHAR(255),
     PRIMARY KEY (dishName, ingredientName),
-    FOREIGN KEY (dishName) REFERENCES dish (name) ON DELETE CASCADE,
+    FOREIGN KEY (dishName) REFERENCES dish (name) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (ingredientName) REFERENCES ingredient (name) ON DELETE CASCADE
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE dishRestaurant (
     dishName VARCHAR(255),
     restaurantName VARCHAR(255),
     PRIMARY KEY (dishName, restaurantName),
-    FOREIGN KEY (dishName) REFERENCES dish (name) ON DELETE CASCADE,
+    FOREIGN KEY (dishName) REFERENCES dish (name) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (restaurantName) REFERENCES restaurant (name) ON DELETE CASCADE
 );
 
@@ -65,6 +65,7 @@ INSERT INTO dishIngredient VALUES
 ('burrito bowl', 'steak'),
 ('burrito bowl', 'tomato'),
 ('burrito bowl', 'corn'),
+('burrito bowl', 'rice'),
 ('salad', 'chicken'),
 ('salad', 'steak'),
 ('salad', 'tomato'),
