@@ -12,7 +12,7 @@ class DishCard extends Component {
 
   componentDidMount() {
     M.AutoInit();
-    axios.get(`http://localhost:2018/ingredients/${this.props.dishName}`)
+    axios.get(`https://cs411-backend.herokuapp.com/ingredients/${this.props.dishName}`)
       .then(res => {
         this.setState({
           ingredients: res.data.map(x => x.ingredientName)
@@ -20,7 +20,7 @@ class DishCard extends Component {
       })
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:2018/restaurants/${this.props.dishName}`)
+    axios.get(`https://cs411-backend.herokuapp.com/restaurants/${this.props.dishName}`)
       .then(res => {
         this.setState({
           restaurants: res.data.map(x => x.restaurantName)

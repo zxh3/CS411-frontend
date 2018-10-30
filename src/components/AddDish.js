@@ -23,7 +23,7 @@ class AddDish extends Component {
       M.toast({html: 'Fields cannot be empty'});
       return;
     } else {
-      axios.post('http://localhost:2018/addDish', {
+      axios.post('https://cs411-backend.herokuapp.com/addDish', {
         dishName,
         ingredients
       })

@@ -14,7 +14,7 @@ class Dishes extends Component {
       return;
     }
 
-    axios.get(`http://localhost:2018/dishes/${this.props.searchedIngredient}`)
+    axios.get(`https://cs411-backend.herokuapp.com/dishes/${this.props.searchedIngredient}`)
       .then(res => {
         this.setState({dishNames: res.data.results.map(x => x.dishName)});
       })
@@ -22,7 +22,7 @@ class Dishes extends Component {
   }
 
   handleDelete = (dishName) => {
-    axios.delete(`http://localhost:2018/dishes/${dishName}`)
+    axios.delete(`https://cs411-backend.herokuapp.com/dishes/${dishName}`)
       .then(res => {
         this.setState({dishNames: this.state.dishNames.filter(x => x !== dishName)});
       })
@@ -30,7 +30,7 @@ class Dishes extends Component {
   }
 
   handleChangeDishName = (oldName, newName) => {
-    axios.put(`http://localhost:2018/dishes`, {
+    axios.put(`https://cs411-backend.herokuapp.com/dishes`, {
       oldName,
       newName
     })
