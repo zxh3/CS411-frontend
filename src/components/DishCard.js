@@ -58,7 +58,7 @@ class DishCard extends Component {
           </div>
 
           <div className="card-content">
-            <a className="card-title modal-trigger" href={`#${this.props.dishName}`}><i className="material-icons right">mode_edit</i>{this.props.dishName}</a>
+            <div className="card-title"><a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a>{this.props.dishName}</div>
 
             <div id={this.props.dishName} className="modal">
               <div className="modal-content">
