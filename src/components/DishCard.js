@@ -7,7 +7,6 @@ class DishCard extends Component {
   state = {
     ingredients: [],
     restaurants: [],
-    types:[],
     newName: ""
   }
 
@@ -21,27 +20,13 @@ class DishCard extends Component {
       })
       .catch(err => console.error(err));
 
-    if (this.props.dishName){
-      axios.get(`https://cs411-backend.herokuapp.com/restaurants/${this.props.dishName}`)
+    axios.get(`https://cs411-backend.herokuapp.com/restaurants/${this.props.dishName}`)
       .then(res => {
         this.setState({
           restaurants: res.data.map(x => x.restaurantName)
         })
       })
       .catch(err => console.error(err));
-    }
-
-
-    if (this.props.dishType){
-      axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.dishType}`)
-        .then(res => {
-          this.setState({
-            types: res.data.map(x => x.dishType)
-          })
-        })
-        .catch(err => console.error(err));
-    }
-
   }
 
   handleChange = (e) => {
@@ -55,6 +40,12 @@ class DishCard extends Component {
     let newName = this.state.newName;
     this.setState({newName: ""});
     this.props.handleChangeDishName(this.props.dishName, newName);
+  }
+
+  addRestaurant = (resName) => {
+    this.setState(state => ({
+      restaurants: [...state.restaurants, resName]
+    }))
   }
 
   render() {
@@ -90,7 +81,7 @@ class DishCard extends Component {
 
           <div className="card-reveal">
               <span className="card-title"><i className="material-icons right">close</i></span>
-              <DishCardReveal restaurants={this.state.restaurants}/>
+              <DishCardReveal restaurants={this.state.restaurants} dishName={this.props.dishName} addRes={this.addRestaurant} />
           </div>
 
         </div>
