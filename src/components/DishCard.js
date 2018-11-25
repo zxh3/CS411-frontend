@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
+import AddReview from './AddReview';
 import axios from 'axios';
 import M from 'materialize-css';
 
@@ -77,6 +78,7 @@ class DishCard extends Component {
             </div>
 
             {ingredients}
+            <AddReview dishName={this.props.dishName}/>
           </div>
 
           <div className="card-reveal">
