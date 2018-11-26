@@ -44,3 +44,22 @@ table.highlight>tbody>tr:hover{
 .fade {
   background-color: rgba(0, 0, 0, 0.24) !important;
 }
+
+
+.btn-small{
+  background-color: rgba(238,110,115,0.95) !important;
+  /* text-shadow: 0 0 2px #ffffff; */
+  font-size: 10px !important;
+  color: rgb(252, 252, 252)  !important;
+}
+
+button{
+  font-size: 15px !important;
+  color: rgba(238,110,115,1.0) !important;
+}
+
+.btn{
+  background-color: rgba(238,110,115,0.95) !important;
+  color: rgb(252, 252, 252)  !important;
+
+}

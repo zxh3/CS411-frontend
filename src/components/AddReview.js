@@ -55,7 +55,7 @@ class AddReview extends Component {
     const rand = Math.floor(Math.random() * 1000);
     return (
       <div>
-        <a className="btn wave-effect wave-light modal-trigger" href={`#${rand + this.props.dishName}`}>add review</a>
+        <a className="btn-small wave-effect wave-light modal-trigger" href={`#${rand + this.props.dishName}`}>add review</a>
 
         <div id={rand + this.props.dishName} className="modal">
           <div className="modal-content">
