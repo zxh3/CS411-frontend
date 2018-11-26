@@ -118,12 +118,18 @@ class DishCard extends Component {
             </div>
 
             {ingredients}
-            <AddReview dishName={this.props.dishName}/>
 
+            <div className="row"/>
 
             <div className="row">
-                < ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
-              </div>
+            <div className="col s6"> 
+            < ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
+            </div>
+            <div className="col s6"> 
+            <AddReview dishName={this.props.dishName}/>
+            </div>
+                
+            </div>
               
           </div>
 
