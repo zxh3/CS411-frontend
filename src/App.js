@@ -7,16 +7,26 @@ import Dishes from './components/Dishes';
 import AddDish from './components/AddDish';
 import Sidebar from './components/Sidebar';
 import Authentication from './components/Authentication';
+import Collections from './components/Collections';
 
 
 // Import Materialize
 import M from "materialize-css";
+import Auth from './components/Auth';
 
 class App extends Component {
   state = {
     searchedIngredient: "",
     auth: 0,
-    filterType: ""
+    filterType: "",
+    collectionChange: 0
+  }
+
+  handleCollectionChange = () => {
+    console.log('[handleCollectionChange]');
+    this.setState((prevState) => ({
+      collectionChange: 1 - prevState.collectionChange
+    }));
   }
 
   componentDidMount() {
@@ -60,13 +70,11 @@ class App extends Component {
               <Sidebar handleFilter={this.handleFilter}/>
             </div>
             <div className="input-field col s9">
-              <Dishes searchedIngredient={this.state.searchedIngredient} filterType={this.state.filterType}/>
+              <Dishes handleCollectionChange={this.handleCollectionChange} searchedIngredient={this.state.searchedIngredient} filterType={this.state.filterType}/>
             </div>
           </div>
 
-          {/* <Dishes searchedIngredient={this.state.searchedIngredient} /> */}
-
-
+          {Auth.isUserAuthenticated() ? <Collections collectionChange={this.state.collectionChange} /> : null}          
         </div>
       </BrowserRouter>
     );

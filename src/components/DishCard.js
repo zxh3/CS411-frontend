@@ -3,12 +3,16 @@ import DishCardReveal from './DishCardReveal';
 import AddReview from './AddReview';
 import axios from 'axios';
 import M from 'materialize-css';
+import Auth from './Auth';
+import AddToCollection from './AddToCollection';
 
 class DishCard extends Component {
   state = {
     ingredients: [],
     restaurants: [],
-    newName: ""
+    newName: "",
+    email: '',
+    collections: [] // elem: {id: ___, name: ___}
   }
 
   componentDidMount() {
@@ -28,6 +32,19 @@ class DishCard extends Component {
         })
       })
       .catch(err => console.error(err));
+
+    if (Auth.isUserAuthenticated()) {
+      let token = Auth.decodeToken();
+      let {email} = token.data;
+      axios.get(`http://localhost:2018/getallusercollection/${email}`)
+        .then(res => {
+          this.setState({
+            email: email,
+            collections: res.data.result
+          })
+        })
+        .catch(err => console.error(err));
+    }
   }
 
   handleChange = (e) => {
@@ -61,7 +78,13 @@ class DishCard extends Component {
 
           <div className="card-image">
             <img className="activator" src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?cs=srgb&dl=food-dinner-lunch-70497.jpg&fm=jpg" alt="food" />
-            <div className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></div>
+            {Auth.isUserAuthenticated() ? 
+              <div>
+                <button className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></button>
+              </div>
+               :
+              null
+              }
           </div>
 
           <div className="card-content">
@@ -78,7 +101,11 @@ class DishCard extends Component {
             </div>
 
             {ingredients}
+
+            {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
+            
             <AddReview dishName={this.props.dishName}/>
+            
           </div>
 
           <div className="card-reveal">
