@@ -11,7 +11,6 @@ import Authentication from './components/Authentication';
 
 // Import Materialize
 import M from "materialize-css";
-import Sidebar from './components/Sidebar';
 
 class App extends Component {
   state = {
