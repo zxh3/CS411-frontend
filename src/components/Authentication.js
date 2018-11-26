@@ -7,6 +7,9 @@ import axios from 'axios';
 
 const loginResponse = (response, handle) => {
   // TODO: add user to database if it's the first time login
+  console.log('response::');
+  console.log(response);
+  
   if (!response) {
     handle();
     return;
@@ -25,7 +28,7 @@ const loginResponse = (response, handle) => {
     }
   }, config.jwtSecret);
   Auth.authenticateUser(token);
-  axios.post(`http://localhost:2018/user/`, {
+  axios.post(`https://cs411-backend.herokuapp.com/user/`, {
     name,
     email,
     imageUrl
