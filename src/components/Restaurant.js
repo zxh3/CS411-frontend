@@ -51,7 +51,7 @@ class Restaurant extends Component {
     return (
         <div>
             <div className="modal-trigger" href={`#${rand + this.props.resName}`}>
-            {this.state.resName}
+            <div className="res">{this.state.resName}</div>
             </div>
             <div id={rand + this.props.resName} className="modal fade">
             <div className="modal-content">
