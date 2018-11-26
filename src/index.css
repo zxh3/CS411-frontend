@@ -20,8 +20,8 @@ code {
 }
 
 .res{
-  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   color: hsla(0, 0%, 100%, 0.938);
+  text-align: center;
 }
 
 .info {
