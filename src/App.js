@@ -8,8 +8,10 @@ import AddDish from './components/AddDish';
 import Sidebar from './components/Sidebar';
 import Authentication from './components/Authentication';
 
+
 // Import Materialize
 import M from "materialize-css";
+import Sidebar from './components/Sidebar';
 
 class App extends Component {
   state = {
