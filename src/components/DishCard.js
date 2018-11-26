@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
+import AddReview from './AddReview';
 import axios from 'axios';
 import M from 'materialize-css';
 
@@ -42,6 +43,12 @@ class DishCard extends Component {
     this.props.handleChangeDishName(this.props.dishName, newName);
   }
 
+  addRestaurant = (resName) => {
+    this.setState(state => ({
+      restaurants: [...state.restaurants, resName]
+    }))
+  }
+
   render() {
     let ingredients = <p>UNKNOWN</p>;
     if (this.state.ingredients.length > 0) {
@@ -71,11 +78,12 @@ class DishCard extends Component {
             </div>
 
             {ingredients}
+            <AddReview dishName={this.props.dishName}/>
           </div>
 
           <div className="card-reveal">
               <span className="card-title"><i className="material-icons right">close</i></span>
-              <DishCardReveal restaurants={this.state.restaurants}/>
+              <DishCardReveal restaurants={this.state.restaurants} dishName={this.props.dishName} addRes={this.addRestaurant} />
           </div>
 
         </div>
