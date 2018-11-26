@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Restaurant from './Restaurant';
 import M from 'materialize-css';
 
 class DishCardReveal extends Component {  
@@ -47,29 +48,30 @@ class DishCardReveal extends Component {
   }
   
   render() {
-    let restaurants = <tr><td>loading...</td></tr>
+    let restaurants = <div><div>loading...</div></div>
     if (this.props.restaurants.length > 0) {
       restaurants = this.props.restaurants.map(restaurant => {
         return (
-          <tr key={restaurant}><td>{restaurant}</td></tr>
+          <div key={restaurant}><Restaurant resName={restaurant}/></div>
         );
       });
     }
   
     return (
       <div>
-        <table className="centered highlight">
-          <thead>
-            <tr>
-              <th>Restaurant</th>
-            </tr>
-          </thead>
+        <div className="centered highlight">
+          <div>
+            <div className="tr">
+              <div className="th">Restaurant</div>
+            </div>
+          </div>
   
-          <tbody>
+          <div>
             {restaurants}
-          </tbody>
-        </table>
+          </div>
+        </div>
   
+
         <div className="row">
           <form className="col s12" onSubmit={this.handleSubmit}>
             <div className="row">
