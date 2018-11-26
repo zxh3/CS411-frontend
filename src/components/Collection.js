@@ -8,7 +8,7 @@ class Collection extends Component {
   }
 
   componentDidUpdate() {
-    axios.get(`http://localhost:2018/collectionname/${this.props.collectionid}`)
+    axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
       .then(res => {
         this.setState({
           collectionName: res.data.result[0].collectionName ? res.data.result[0].collectionName : ''
@@ -16,7 +16,7 @@ class Collection extends Component {
       })
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:2018/collectiondish/${this.props.collectionid}`)
+    axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
       .then(res => {
         this.setState({
           dishNames: res.data.result.map(x => x.dishName)
@@ -26,7 +26,7 @@ class Collection extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:2018/collectionname/${this.props.collectionid}`)
+    axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
       .then(res => {
         this.setState({
           collectionName: res.data.result[0].collectionName ? res.data.result[0].collectionName : ''
@@ -34,7 +34,7 @@ class Collection extends Component {
       })
       .catch(err => console.error(err));
 
-    axios.get(`http://localhost:2018/collectiondish/${this.props.collectionid}`)
+    axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
       .then(res => {
         this.setState({
           dishNames: res.data.result.map(x => x.dishName)

@@ -1,18 +1,27 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
 import AddReview from './AddReview';
+// import Review from './Review';
+// import ViewReview from './ViewReview';
 import axios from 'axios';
 import M from 'materialize-css';
+
 import Auth from './Auth';
 import AddToCollection from './AddToCollection';
+import ViewReview from './ViewReview';
 
 class DishCard extends Component {
   state = {
     ingredients: [],
     restaurants: [],
-    newName: "",
     email: '',
-    collections: [] // elem: {id: ___, name: ___}
+    collections: [], // elem: {id: ___, name: ___}
+    reviews: [],
+    content : "",
+    rating : "",
+    newName: "",
+    types:[],
+    currDish: ""
   }
 
   componentDidMount() {
@@ -36,7 +45,7 @@ class DishCard extends Component {
     if (Auth.isUserAuthenticated()) {
       let token = Auth.decodeToken();
       let {email} = token.data;
-      axios.get(`http://localhost:2018/getallusercollection/${email}`)
+      axios.get(`https://cs411-backend.herokuapp.com/getallusercollection/${email}`)
         .then(res => {
           this.setState({
             email: email,
@@ -45,6 +54,37 @@ class DishCard extends Component {
         })
         .catch(err => console.error(err));
     }
+      if (this.props.dishType){
+        axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.dishType}`)
+          .then(res => {
+            this.setState({
+              types: res.data.map(x => x.dishType)
+            })
+          })
+          .catch(err => console.error(err));
+      }
+
+      axios.get(`https://cs411-backend.herokuapp.com/reviews/${this.props.dishName}`)
+        .then(res => {
+          console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+          this.setState({
+            content: res.data.map(x => x.content),
+            rating: res.data.map(x=>x.rating)
+          });
+          for (var i = 0; i < this.state.content.length; i++){
+            let children = []
+            children.push(
+                <div className="row" key={i}>
+                <div>Rating : {this.state.rating[i]}</div>
+                <div>{this.state.content[i]}</div>
+                </div>)
+            this.setState(state => ({
+              reviews: [...state.reviews, children]
+            }))
+            console.log("test72: ", this.props.dishName, this.state.reviews)
+          }
+        })
+        .catch(err => console.error(err));
   }
 
   handleChange = (e) => {
@@ -102,10 +142,20 @@ class DishCard extends Component {
 
             {ingredients}
 
-            {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
             
-            <AddReview dishName={this.props.dishName}/>
             
+            <div className="row" style={{marginTop: '5px'}}>
+              <div className="col s5"> 
+                <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
+              </div>
+              <div className="col s5"> 
+                <AddReview className="col s5" dishName={this.props.dishName}/>
+              </div>
+              <div className="col s2">
+                {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
+              </div>
+            </div>
+
           </div>
 
           <div className="card-reveal">
@@ -118,5 +168,5 @@ class DishCard extends Component {
     );
   }
 }
-
+ 
 export default DishCard;

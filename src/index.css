@@ -19,14 +19,47 @@ code {
   background-color: rgba(30,30,30,0.7) !important;
 }
 
+.res{
+  color: hsla(0, 0%, 100%, 0.938);
+  text-align: center;
+}
+
+.info {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  color: rgba(238,110,115,1.0) !important;
+}
+
 table.highlight>tbody>tr:hover{
   background-color: rgba(238,110,115,0.6) !important;
 }
 
-td, th{
+.td, .th{
   padding: 5px 5px !important;
 }
 
-th {
+.th {
   color: rgba(238,110,115,1.0) !important;
+}
+
+.fade {
+  background-color: rgba(0, 0, 0, 0.24) !important;
+}
+
+
+.btn-small{
+  background-color: rgba(238,110,115,0.95) !important;
+  /* text-shadow: 0 0 2px #ffffff; */
+  font-size: 10px !important;
+  color: rgb(252, 252, 252)  !important;
+}
+
+button{
+  font-size: 15px !important;
+  color: rgba(238,110,115,1.0) !important;
+}
+
+.btn{
+  background-color: rgba(238,110,115,0.95) !important;
+  color: rgb(252, 252, 252)  !important;
+
 }

@@ -66,7 +66,7 @@ class App extends Component {
           <SearchBar handleSearch={this.handleSearch} />
 
           <div className="row">
-            <div className="input-field col s1 offset-s1"> 
+            <div className="input-field col s1 offset-s1">
               <Sidebar handleFilter={this.handleFilter}/>
             </div>
             <div className="input-field col s9">

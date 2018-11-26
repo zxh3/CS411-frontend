@@ -12,7 +12,7 @@ class AddToCollection extends Component {
 
   handleAdd = (id) => {
     console.log(`Adding ${this.props.dishName} to ${id}`);
-    axios.post('http://localhost:2018/addToCollection', {
+    axios.post('https://cs411-backend.herokuapp.com/addToCollection', {
       dishName: this.props.dishName,
       collectionid: id
     });
@@ -26,7 +26,7 @@ class AddToCollection extends Component {
 
     return (
       <div>
-        <div className="dropdown-trigger right btn-floating waves-effect waves-light orange lighten-3" data-target={`dropdown${this.props.dishName}`}><i className="material-icons">favorite</i></div>
+        <div className="dropdown-trigger right btn-floating waves-effect waves-light red lighten-2" data-target={`dropdown${this.props.dishName}`}><i className="material-icons">favorite</i></div>
         <ul id={`dropdown${this.props.dishName}`} className='dropdown-content'>
           {collections}
         </ul>

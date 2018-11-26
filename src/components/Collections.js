@@ -13,7 +13,7 @@ class Collections extends Component {
   handleDelete = (collectionid) => {
     let newids = this.state.collectionids.filter(id => id !== collectionid);
 
-    axios.delete(`http://localhost:2018/deletecollection/${collectionid}`)
+    axios.delete(`https://cs411-backend.herokuapp.com/deletecollection/${collectionid}`)
       .then(_ => {
         this.setState({collectionids: newids});    
       })
@@ -30,11 +30,11 @@ class Collections extends Component {
     e.preventDefault();
     let email = this.state.email;
     let collectionName = this.state.newCollection;
-    axios.post('http://localhost:2018/addcollection', {
+    axios.post('https://cs411-backend.herokuapp.com/addcollection', {
       email,
       collectionName
     }).then(res => {
-      axios.get(`http://localhost:2018/usercollection/${email}`)
+      axios.get(`https://cs411-backend.herokuapp.com/usercollection/${email}`)
       .then(res => {
         this.setState({
           collectionids: res.data.result.map(x => x.collectionid),
@@ -52,7 +52,7 @@ class Collections extends Component {
     let token = Auth.decodeToken();
     let { email } = token.data;
     this.setState({email: email});
-    axios.get(`http://localhost:2018/usercollection/${email}`)
+    axios.get(`https://cs411-backend.herokuapp.com/usercollection/${email}`)
       .then(res => {
         this.setState({
           collectionids: res.data.result.map(x => x.collectionid)
