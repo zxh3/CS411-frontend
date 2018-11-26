@@ -10,7 +10,7 @@ class Dishes extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('[componentDidUpdate] @ Dishes.js');
-    if (prevProps === this.props && isEqual(prevState, this.state)) {
+    if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
 
@@ -23,7 +23,6 @@ class Dishes extends Component {
       })
       .catch(err => console.error(err));
     }
-
 
     if (this.props.filterType){
       axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.filterType}`)
