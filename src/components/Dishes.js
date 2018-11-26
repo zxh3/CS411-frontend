@@ -24,7 +24,6 @@ class Dishes extends Component {
       .catch(err => console.error(err));
     }
 
-
     if (this.props.filterType){
       axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.filterType}`)
       .then(res => {
