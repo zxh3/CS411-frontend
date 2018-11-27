@@ -151,10 +151,10 @@ class DishCard extends Component {
             
             
             <div className="row" style={{marginTop: '5px'}}>
-              <div className="col s5"> 
+              <div className="col s6"> 
                 <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
               </div>
-              <div className="col s5"> 
+              <div className="col s6"> 
                 <AddReview className="col s5" dishName={this.props.dishName}/>
               </div>
               <div className="col s2">
