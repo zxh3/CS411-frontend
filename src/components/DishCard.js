@@ -5,6 +5,8 @@ import AddReview from './AddReview';
 // import ViewReview from './ViewReview';
 import axios from 'axios';
 import M from 'materialize-css';
+import StarRatingComponent from 'react-star-rating-component';
+
 
 import Auth from './Auth';
 import AddToCollection from './AddToCollection';
@@ -74,8 +76,12 @@ class DishCard extends Component {
           for (var i = 0; i < this.state.content.length; i++){
             let children = []
             children.push(
-                <div className="row" key={i}>
-                <div>Rating : {this.state.rating[i]}</div>
+              <div className="row" key={i}>
+                <StarRatingComponent 
+                name="rate2" 
+                editing={false}
+                starCount={5}
+                value={this.state.rating[i]}/>
                 <div>{this.state.content[i]}</div>
                 </div>)
             this.setState(state => ({
