@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
-import AddReview from './AddReview';
+import AddResReview from './AddResReview';
 import ViewReview from './ViewReview';
 
 class Restaurant extends Component {
@@ -79,7 +79,7 @@ class Restaurant extends Component {
                     {/* <AddReview className="col s5" dishName={this.props.resName}/> */}
                 </form>
             </div>
-            <AddReview className="col s5" dishName={this.props.resName}/>
+            <AddResReview className="col s5" resName={this.props.resName}/>
             </div>
         </div>
       </div>
