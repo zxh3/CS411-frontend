@@ -25,7 +25,7 @@ class AddReview extends Component {
       M.toast({html: 'Fields cannot be empty'});
       return;
     } else {
-      axios.post('https://cs411-backend.herokuapp.com/addReview', {
+      axios.post('https://cs411-backend.herokuapp.com/dishes/addReview', {
         dishName,
         reviewContent,
         dishRating
@@ -59,7 +59,7 @@ class AddReview extends Component {
 
         <div id={rand + this.props.dishName} className="modal">
           <div className="modal-content">
-            <h3 className="red-text text-lighten-2">Create a review:</h3>
+            <h3 className="red-text text-lighten-2">{this.props.dishName}</h3>
             <div className="row">
               <form className="col s12" onSubmit={this.handleSubmit}>
 
