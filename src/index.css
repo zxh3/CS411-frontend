@@ -45,7 +45,6 @@ table.highlight>tbody>tr:hover{
 .fade {
   background-color: rgba(0, 0, 0, 0.24) !important;
   width: 90% !important;
-  z-index: 9999 !important;
 }
 
 .btn-small{
@@ -64,4 +63,13 @@ button{
   background-color: rgba(238,110,115,0.95) !important;
   color: rgb(252, 252, 252)  !important;
 
+}
+
+.reviewRes {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  width: 100% !important;
+}
+
+.review {
+  color: black;
 }
