@@ -3,13 +3,15 @@ import axios from 'axios';
 import M from 'materialize-css';
 import AddResReview from './AddResReview';
 import ViewReview from './ViewReview';
+import StarRatingComponent from 'react-star-rating-component';
 
 class Restaurant extends Component {
   state = {
     resName: this.props.resName,
     type: "",
     address: "",
-    phoneNumber: ""
+    phoneNumber: "",
+    reviews: []
   }
 
   componentDidMount() {
@@ -24,22 +26,32 @@ class Restaurant extends Component {
         })
       })
       .catch(err => console.error(err));
-  }
 
-  modalChange = (e) => {
-    console.log("load resName: "+ this.props.resName);
-    axios.get(`https://cs411-backend.herokuapp.com/dishes/restaurants/${this.props.resName}`)
+    axios.get(`https://cs411-backend.herokuapp.com/reviews/restaurants/${this.props.resName}`)
       .then(res => {
-          console.log("address:" + res.data.map(x => x.address));
-          this.setState.address = res.data.map(x => x.address);
         this.setState({
-          type: res.data.map(x => x.type),
-          address: res.data.map(x => x.address),
-          phoneNumber: res.data.map(x => x.phoneNumber)
-        })
+          content: res.data.map(x => x.content),
+          rating: res.data.map(x=>x.rating)
+        });
+        for (var i = 0; i < this.state.content.length; i++){
+          let children = []
+          children.push(
+            <div className="row" key={i}>
+              <StarRatingComponent 
+              name="rate2" 
+              editing={false}
+              starCount={5}
+              value={this.state.rating[i]}/>
+              <div>{this.state.content[i]}</div>
+              </div>)
+          this.setState(state => ({
+            reviews: [...state.reviews, children]
+          }))
+        }
       })
       .catch(err => console.error(err));
   }
+
 
   handleChange = (e) => {
     this.setState({
@@ -56,7 +68,7 @@ class Restaurant extends Component {
             </div>
             <div id={rand + this.props.resName} className="modal fade">
             <i className="modal-close material-icons right">close</i>
-            <div className="modal-content">
+            <div className="modal-content" style={{padding:0}}>
             <div>
                 <form>
                     <div>
@@ -75,11 +87,14 @@ class Restaurant extends Component {
                         <b className="info">Phone Number: </b> 
                         <div className="res">{this.state.phoneNumber}</div>
                     </div>
-                    {/* <ViewReview reviews={this.state.reviews} dishName={this.props.resName}/> */}
-                    {/* <AddReview className="col s5" dishName={this.props.resName}/> */}
                 </form>
             </div>
-            <AddResReview className="col s5" resName={this.props.resName}/>
+            <div className="col s6"> 
+              <ViewReview reviews={this.state.reviews} dishName={this.props.resName}/>
+            </div>
+            <div className="col s6"> 
+              <AddResReview className="col s5" resName={this.props.resName}/>
+            </div>
             </div>
         </div>
       </div>

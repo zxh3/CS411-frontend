@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
-import AddReview from './AddReview';
+import AddDishReview from './AddDishReview';
 // import Review from './Review';
 // import ViewReview from './ViewReview';
 import axios from 'axios';
@@ -66,7 +66,7 @@ class DishCard extends Component {
           .catch(err => console.error(err));
       }
 
-      axios.get(`https://cs411-backend.herokuapp.com/reviews/${this.props.dishName}`)
+      axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
         .then(res => {
           console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           this.setState({
@@ -155,7 +155,7 @@ class DishCard extends Component {
                 <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
               </div>
               <div className="col s6"> 
-                <AddReview className="col s5" dishName={this.props.dishName}/>
+                <AddDishReview className="col s5" dishName={this.props.dishName}/>
               </div>
               <div className="col s2">
                 {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}

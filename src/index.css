@@ -6,13 +6,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(https://cdn.dribbble.com/users/107759/screenshots/3765434/burger.gif), url(https://cdn.dribbble.com/users/283944/screenshots/1252240/donut-gif.gif), url(https://cdn.dribbble.com/users/107759/screenshots/3800199/donut-latte.gif), url(https://media.giphy.com/media/MUGELsnKIpHG7OoPV4/giphy.gif);
+  background-size: 35%, 12%, 35%, 12%;
+  background-repeat: no-repeat;
+  background-position: center bottom, right center, left top, right bottom; 
+}
+
+
+.brand-logo {
+  text-shadow: 0 0 2px #ffffff;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 .card-reveal{
   color: #ffffff;
@@ -22,7 +31,7 @@ code {
 .res{
   color: hsla(0, 0%, 100%, 0.938);
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .info {
@@ -32,13 +41,14 @@ code {
 
 table.highlight>tbody>tr:hover{
   background-color: rgba(238,110,115,0.6) !important;
+  width: 100% !important;
 }
 
-.td, .th{
+.td, .th, td, th{
   padding: 5px 5px !important;
 }
 
-.th {
+.th, th {
   color: rgba(238,110,115,1.0) !important;
 }
 
@@ -49,10 +59,11 @@ table.highlight>tbody>tr:hover{
 
 .btn-small{
   background-color: rgba(238,110,115,0.95) !important;
-  /* text-shadow: 0 0 2px #ffffff; */
+  text-shadow: 0 0 2px #ffffff;
   font-size: 10px !important;
   color: rgb(252, 252, 252)  !important;
 }
+
 
 button{
   font-size: 15px !important;
@@ -66,10 +77,14 @@ button{
 }
 
 .reviewRes {
-  background-color: rgba(255, 255, 255, 0.78) !important;
-  width: 100% !important;
+  background-color: rgba(255, 255, 255, 0.87) !important;
+  width: 90% !important;
 }
 
 .review {
   color: black;
+}
+
+.btn-flat {
+  font-weight: bold;
 }
