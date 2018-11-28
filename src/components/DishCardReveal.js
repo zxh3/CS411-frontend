@@ -48,7 +48,7 @@ class DishCardReveal extends Component {
   }
   
   render() {
-    let restaurants = <div><div>loading...</div></div>
+    let restaurants = <div><div className="res">loading...</div></div>
     if (this.props.restaurants.length > 0) {
       restaurants = this.props.restaurants.map(restaurant => {
         return (
@@ -62,7 +62,7 @@ class DishCardReveal extends Component {
         <div className="centered highlight">
           <div>
             <div className="tr">
-              <div className="th">Restaurant</div>
+              <div className="th" style={{textAlign:"center"}}>Restaurant</div>
             </div>
           </div>
   

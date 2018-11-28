@@ -22,6 +22,7 @@ code {
 .res{
   color: hsla(0, 0%, 100%, 0.938);
   text-align: center;
+  margin-bottom: 4px;
 }
 
 .info {
@@ -43,8 +44,9 @@ table.highlight>tbody>tr:hover{
 
 .fade {
   background-color: rgba(0, 0, 0, 0.24) !important;
+  width: 90% !important;
+  z-index: 9999 !important;
 }
-
 
 .btn-small{
   background-color: rgba(238,110,115,0.95) !important;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
+import AddReview from './AddReview';
+import ViewReview from './ViewReview';
 
 class Restaurant extends Component {
   state = {
@@ -46,7 +48,6 @@ class Restaurant extends Component {
   }
 
   render() {
-    console.log("resN: "+ this.state.resName);
     const rand = Math.floor(Math.random() * 1000);
     return (
         <div>
@@ -54,6 +55,7 @@ class Restaurant extends Component {
             <div className="res">{this.state.resName}</div>
             </div>
             <div id={rand + this.props.resName} className="modal fade">
+            <i className="modal-close material-icons right">close</i>
             <div className="modal-content">
             <div>
                 <form>
@@ -73,8 +75,11 @@ class Restaurant extends Component {
                         <b className="info">Phone Number: </b> 
                         <div className="res">{this.state.phoneNumber}</div>
                     </div>
+                    {/* <ViewReview reviews={this.state.reviews} dishName={this.props.resName}/> */}
+                    {/* <AddReview className="col s5" dishName={this.props.resName}/> */}
                 </form>
             </div>
+            <AddReview className="col s5" dishName={this.props.resName}/>
             </div>
         </div>
       </div>
