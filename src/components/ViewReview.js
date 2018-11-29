@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ViewReview = (props) => {
-  console.log(props);
+  // console.log(props);
     let reviews = <tr><td className="review">no views</td></tr>
     if (props.reviews.length > 0) {
       reviews = props.reviews.map(review => {
