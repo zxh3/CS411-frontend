@@ -5,7 +5,7 @@ const ViewReview = (props) => {
     if (props.reviews.length > 0) {
       reviews = props.reviews.map(review => {
         return (
-          <tr key={review}><td className="review">{review}</td></tr>
+          <tr key={review + props.dishName + Math.random()}><td className="review">{review}</td></tr>
         );
       });
     }
@@ -22,7 +22,7 @@ const ViewReview = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {reviews}
+                  {reviews}
                 </tbody>
             </table>
             </div>

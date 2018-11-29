@@ -6,9 +6,8 @@ import { GoogleLogin } from 'react-google-login';
 import axios from 'axios';
 
 const loginResponse = (response, handle) => {
-  // TODO: add user to database if it's the first time login
-  console.log('response::');
-  console.log(response);
+  // console.log('response::');
+  // console.log(response);
   
   if (response.error) {
     handle();
@@ -16,9 +15,9 @@ const loginResponse = (response, handle) => {
   }
 
   let { name, email, imageUrl } = response.profileObj;
-  console.log(name);
-  console.log(email);
-  console.log(imageUrl);
+  // console.log(name);
+  // console.log(email);
+  // console.log(imageUrl);
 
   const token = jwt.sign({
     exp: Math.floor(Date.now() / 1000) + (12 * 60 * 60), // expire after 12 hours
@@ -34,13 +33,13 @@ const loginResponse = (response, handle) => {
     email,
     imageUrl
   }).then(res => {
-    console.log(res.data);
+    // console.log(res.data);
     handle();
   }).catch(err => console.error(err));
 }
 
 const logout = (handle) => {
-  console.log('[logoutResponse] called')
+  // console.log('[logoutResponse] called')
   Auth.deauthenticateUser();
   handle();
 }

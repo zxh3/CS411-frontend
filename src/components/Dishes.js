@@ -9,7 +9,7 @@ class Dishes extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log('[componentDidUpdate] @ Dishes.js');
+    // console.log('[componentDidUpdate] @ Dishes.js');
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
@@ -17,9 +17,9 @@ class Dishes extends Component {
     if (this.props.searchedIngredient){
       axios.get(`https://cs411-backend.herokuapp.com/dishes/${this.props.searchedIngredient}`)
       .then(res => {
-        console.log(res.data.results)
+        // console.log(res.data.results)
         this.setState({dishNames: res.data.results.map(x => x.dishName)});
-        console.log(this.state)
+        // console.log(this.state)
       })
       .catch(err => console.error(err));
     }
@@ -27,9 +27,9 @@ class Dishes extends Component {
     if (this.props.filterType){
       axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.filterType}`)
       .then(res => {
-        console.log(res.data.results)
+        // console.log(res.data.results)
         this.setState({dishNames: res.data.results.map(x => x.name)});
-        console.log(this.state)
+        // console.log(this.state)
       })
       .catch(err => console.error(err));
     }
