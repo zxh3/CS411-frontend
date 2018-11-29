@@ -52,9 +52,9 @@ class Recommend extends Component {
     return (
         <div>
 
-            <div className="recommendbtn">
-              <div className="btn-small modal-trigger" href={`#rec${this.props.dishName}`}>Recommend</div>                
-            </div>
+            
+            <div className="btn-small modal-trigger" href={`#rec${this.props.dishName}`}>Recommend</div>                
+            
 
             <div id={`rec${this.props.dishName}`} className="modal">
                 <div className="modal-content">

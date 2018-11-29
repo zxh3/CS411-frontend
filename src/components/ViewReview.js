@@ -12,7 +12,7 @@ const ViewReview = (props) => {
     const rand = Math.floor(Math.random() * 1000);
      return (
       <div>
-        <div className="btn-small modal-trigger" href={`#review${rand + props.dishName}`}>View reviews</div>
+        <div style={{backgroundColor: 'rgba(238,110,115,0.95)'}} className="btn-floating modal-trigger" href={`#review${rand + props.dishName}`}><i className="material-icons">comment</i></div>
                         
             <div id={`review${rand + props.dishName}`} className="modal reviewRes">
             <table className="centered highlight">

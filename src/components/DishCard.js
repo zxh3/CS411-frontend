@@ -157,20 +157,18 @@ class DishCard extends Component {
 
             <div className="card-action">
               <div className="row">
-                <div className="col s6">
-                  <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
-                </div>
                 {Auth.isUserAuthenticated() ?
                   <React.Fragment>
                     <div className="col s6">
-                      <AddDishReview className="col s4" dishName={this.props.dishName} />
+                      <AddDishReview dishName={this.props.dishName} />
                     </div>
                     <div className="col s6">
-                      <Recommend className="col s4" dishName={this.props.dishName} />
+                      <Recommend dishName={this.props.dishName} />
                     </div>
                   </React.Fragment>
                   : null}
               </div>
+              <ViewReview reviews={this.state.reviews} dishName={this.props.dishName} />
             </div>
 
           </div>
