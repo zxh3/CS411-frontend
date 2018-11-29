@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
 import AddDishReview from './AddDishReview';
+import Recommend from './Recommend';
 // import Review from './Review';
 // import ViewReview from './ViewReview';
 import axios from 'axios';
@@ -134,13 +135,16 @@ class DishCard extends Component {
           </div>
 
           <div className="card-content">
-            <div className="card-title"><a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a>{this.props.dishName}</div>
+            <div className="card-title">
+            <a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a>
+            {this.props.dishName}
+            </div>
 
             <div id={this.props.dishName} className="modal">
               <div className="modal-content">
                 <form className="input-field" onSubmit={this.handleSubmit}>
-                  <input id="newName" type="text" value={this.state.newName} onChange={this.handleChange} />
                   <label htmlFor="newName">New Dish Name</label>
+                  <input id="newName" type="text" value={this.state.newName} onChange={this.handleChange} />
                   <button className="btn">Submit</button>
                 </form>
               </div>
@@ -159,6 +163,10 @@ class DishCard extends Component {
               </div>
               <div className="col s2">
                 {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
+              </div>
+
+              <div className="col s6"> 
+                <Recommend className="col s4" dishName={this.props.dishName}/>
               </div>
             </div>
 
