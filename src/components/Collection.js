@@ -8,7 +8,7 @@ class Collection extends Component {
     collectionName: ''
   }
 
-  componentDidUpdate(prevState, prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
