@@ -206,11 +206,12 @@ class DishCard extends Component {
                       <Recommend dishName={this.props.dishName} />
                     </div>
                     </div>
-                    <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
 
                     
                   </React.Fragment>
                   : null}
+                  <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
+
               </div>
             </div>
 
