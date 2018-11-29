@@ -134,13 +134,7 @@ class DishCard extends Component {
 
           <div className="card-image">
             <img className="activator" src={this.state.image} alt="food" />
-            {Auth.isUserAuthenticated() ? 
-              <div>
-                <button className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></button>
-              </div>
-               :
-              null
-              }
+            {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections} /> : null}
           </div>
 
           <div className="card-content">
@@ -161,27 +155,22 @@ class DishCard extends Component {
 
             {ingredients}
 
-            
-            
-            <div className="row" style={{marginTop: '5px'}}>
-              <div className="col s6"> 
-                <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
+            <div className="card-action">
+              <div className="row">
+                <div className="col s6">
+                  <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
+                </div>
+                {Auth.isUserAuthenticated() ?
+                  <React.Fragment>
+                    <div className="col s6">
+                      <AddDishReview className="col s4" dishName={this.props.dishName} />
+                    </div>
+                    <div className="col s6">
+                      <Recommend className="col s4" dishName={this.props.dishName} />
+                    </div>
+                  </React.Fragment>
+                  : null}
               </div>
-
-              {Auth.isUserAuthenticated() ? 
-                <div>
-                  <div className="col s6">
-                    <AddDishReview dishName={this.props.dishName} />
-                  </div>
-
-                  <div className="col s6">
-                    <Recommend dishName={this.props.dishName} />
-                  </div>
-
-                  <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections} />
-
-                </div> : null}
-              
             </div>
 
           </div>
