@@ -71,7 +71,6 @@ class App extends Component {
           <Authentication handleAuth={this.handleAuth} auth={this.props.auth} />
           <AddDish />
           <SearchBar handleSearch={this.handleSearch} />
-
           <div className="row">
             <div className="input-field col s1 offset-s1">
               <Sidebar handleFilter={this.handleFilter}/>
@@ -80,7 +79,6 @@ class App extends Component {
               <Dishes handleCollectionChange={this.handleCollectionChange} searchedIngredient={this.state.searchedIngredient} filterType={this.state.filterType}/>
             </div>
           </div>
-
 
           
           {Auth.isUserAuthenticated() ? authContent : null}          

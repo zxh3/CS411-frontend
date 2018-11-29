@@ -64,7 +64,6 @@ table.highlight>tbody>tr:hover{
   color: rgb(252, 252, 252)  !important;
 }
 
-
 button{
   font-size: 15px !important;
   color: rgba(238,110,115,1.0) !important;
@@ -81,8 +80,18 @@ button{
   width: 90% !important;
 }
 
-.review {
+.review, .recommend {
   color: black;
+}
+
+.recommender {
+  font-weight: bold;
+}
+
+.dishrec {
+  color: crimson;
+  font-weight: bold;
+  
 }
 
 .btn-flat {
