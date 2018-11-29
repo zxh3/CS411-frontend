@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { isEqual } from 'lodash';
 
 class Collection extends Component {
   state = {
@@ -7,7 +8,11 @@ class Collection extends Component {
     collectionName: ''
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevState, prevProps) {
+    if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
+      return;
+    }
+
     axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
       .then(res => {
         this.setState({
