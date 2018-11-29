@@ -31,10 +31,10 @@ class AddResReview extends Component {
       })
         .then(res => {
           if (res.data.error) {
-            // console.log(res.data.error);
             M.toast({html: res.data.error});
           } else {
             M.toast({html: "Success!"});
+            this.props.handleUpdateReview();
           }
         })
         .catch(err => console.error(err));

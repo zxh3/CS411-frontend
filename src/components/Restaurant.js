@@ -4,6 +4,7 @@ import M from 'materialize-css';
 import AddResReview from './AddResReview';
 import ViewReview from './ViewReview';
 import StarRatingComponent from 'react-star-rating-component';
+import { isEqual } from 'lodash';
 
 class Restaurant extends Component {
   state = {
@@ -12,7 +13,30 @@ class Restaurant extends Component {
     phoneNumber: "",
     reviews: [],
     content: [],
-    rating: []
+    rating: [],
+    update: 0
+  }
+
+  handleUpdateReview = () => {
+    this.setState(prevState => {
+      return {
+        update: 1 - prevState.update
+      }
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
+      return;
+    }
+    axios.get(`https://cs411-backend.herokuapp.com/reviews/restaurants/${this.props.resName}`)
+    .then(res => {
+      this.setState({
+        content: res.data.map(x => x.content),
+        rating: res.data.map(x=>x.rating)
+      });
+    })
+    .catch(err => console.error(err));
   }
 
   componentDidMount() {
@@ -33,21 +57,6 @@ class Restaurant extends Component {
           content: res.data.map(x => x.content),
           rating: res.data.map(x=>x.rating)
         });
-        for (var i = 0; i < this.state.content.length; i++){
-          let children = []
-          children.push(
-            <div className="row" key={i}>
-              <StarRatingComponent 
-              name="rate2" 
-              editing={false}
-              starCount={5}
-              value={this.state.rating[i]}/>
-              <div>{this.state.content[i]}</div>
-              </div>)
-          this.setState(state => ({
-            reviews: [...state.reviews, children]
-          }))
-        }
       })
       .catch(err => console.error(err));
   }
@@ -60,6 +69,18 @@ class Restaurant extends Component {
   }
 
   render() {
+    let children = [];
+    for (var i = 0; i < this.state.content.length; i++){
+      children.push(
+        <div className="row" key={i}>
+          <StarRatingComponent 
+          name="rate2" 
+          editing={false}
+          starCount={5}
+          value={this.state.rating[i]}/>
+          <div>{this.state.content[i]}</div>
+          </div>);
+    }
     const rand = Math.floor(Math.random() * 1000);
     return (
         <div>
@@ -90,10 +111,10 @@ class Restaurant extends Component {
                 </form>
             </div>
             <div className="col s6"> 
-              <ViewReview reviews={this.state.reviews} dishName={this.props.resName}/>
+              <ViewReview reviews={children} dishName={this.props.resName} update={this.state.update}/>
             </div>
             <div className="col s6"> 
-              <AddResReview className="col s5" resName={this.props.resName}/>
+              <AddResReview className="col s5" resName={this.props.resName} handleUpdateReview={this.handleUpdateReview}/>
             </div>
             </div>
         </div>
