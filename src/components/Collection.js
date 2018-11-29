@@ -13,7 +13,15 @@ class Collection extends Component {
       return;
     }
 
-    console.log(`prevState: ${prevState}\nprevProps: ${prevProps}\nthis.props: ${this.props}\nthis.state: ${this.state}`);
+    console.log('prevState: ');
+    console.log(prevState);
+    console.log('this.state: ');
+    console.log(this.state);
+    
+    console.log('prevProps: ');
+    console.log(prevProps);
+    console.log('this.props: ');
+    console.log(this.props);
 
     axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
       .then(res => {
