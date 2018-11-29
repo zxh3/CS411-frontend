@@ -19,6 +19,7 @@ class Sidebar  extends Component{
                     <button className="btn-flat waves-effect waves-light" value="Indian" onClick={this.handleClick}>Indian</button>
                     <button className="btn-flat waves-effect waves-light" value="Italian" onClick={this.handleClick}>Italian</button>
                     <button className="btn-flat waves-effect waves-light" value="Thai" onClick={this.handleClick}>Thai</button>
+                    <button className="btn-flat waves-effect waves-light" value="Desert" onClick={this.handleClick}>Dessert</button>
                 </div>
             </div>
         );
