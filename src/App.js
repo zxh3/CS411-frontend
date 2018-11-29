@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   handleCollectionChange = () => {
-    console.log('[handleCollectionChange]');
+    console.log(`[handleCollectionChange]: ${this.state.collectionChange}`);
     this.setState((prevState) => ({
       collectionChange: 1 - prevState.collectionChange
     }));
