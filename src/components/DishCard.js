@@ -179,6 +179,7 @@ class DishCard extends Component {
 
             <div className="card-action">
               <div className="row">
+                
                 {Auth.isUserAuthenticated() ?
                   <React.Fragment>
                     <div className="row">
@@ -191,7 +192,8 @@ class DishCard extends Component {
                     </div>
                   </React.Fragment>
                   : null}
-                  <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
+
+                <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
               </div>
             </div>
 
