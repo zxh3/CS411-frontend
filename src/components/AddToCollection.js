@@ -4,14 +4,14 @@ import Auth from './Auth';
 
 class AddToCollection extends Component {
   componentDidMount() {
-    console.log(this.props.dishName);
+    // console.log(this.props.dishName);
     let token = Auth.decodeToken();
     let { email } = token.data;
     this.setState({email: email});
   }
 
   handleAdd = (id) => {
-    console.log(`Adding ${this.props.dishName} to ${id}`);
+    // console.log(`Adding ${this.props.dishName} to ${id}`);
     axios.post('https://cs411-backend.herokuapp.com/addToCollection', {
       dishName: this.props.dishName,
       collectionid: id

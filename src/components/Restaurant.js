@@ -7,7 +7,6 @@ import StarRatingComponent from 'react-star-rating-component';
 
 class Restaurant extends Component {
   state = {
-    resName: this.props.resName,
     type: "",
     address: "",
     phoneNumber: "",
@@ -16,7 +15,7 @@ class Restaurant extends Component {
 
   componentDidMount() {
     M.AutoInit();
-    console.log("resName: "+ this.props.resName);
+    // console.log("resName: "+ this.props.resName);
     axios.get(`https://cs411-backend.herokuapp.com/dishes/restaurants/${this.props.resName}`)
       .then(res => {
         this.setState({
@@ -64,7 +63,7 @@ class Restaurant extends Component {
     return (
         <div>
             <div className="modal-trigger" href={`#${rand + this.props.resName}`}>
-            <div className="res">{this.state.resName}</div>
+            <div className="res">{this.props.resName}</div>
             </div>
             <div id={rand + this.props.resName} className="modal fade">
             <i className="modal-close material-icons right">close</i>
@@ -73,7 +72,7 @@ class Restaurant extends Component {
                 <form>
                     <div>
                         <b className="info">Restaurant: </b> 
-                        <div className="res">{this.state.resName}</div>
+                        <div className="res">{this.props.resName}</div>
                     </div>
                     <div>
                         <b className="info">Type: </b> 

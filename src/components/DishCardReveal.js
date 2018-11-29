@@ -8,9 +8,9 @@ class DishCardReveal extends Component {
     resName: ""
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
+  // componentDidMount() {
+  //   console.log(this.props);
+  // }
   
   handleChange = (e) => {
     this.setState({
@@ -33,7 +33,7 @@ class DishCardReveal extends Component {
       })
         .then(res => {
           if (res.data.error) {
-            console.log("error", resName, dishName);
+            // console.log("error", resName, dishName);
             M.toast({html: res.data.error});
           } else {
             this.props.addRes(resName);
@@ -52,7 +52,7 @@ class DishCardReveal extends Component {
     if (this.props.restaurants.length > 0) {
       restaurants = this.props.restaurants.map(restaurant => {
         return (
-          <div key={restaurant}><Restaurant resName={restaurant}/></div>
+          <div key={restaurant + this.props.dishName}><Restaurant resName={restaurant}/></div>
         );
       });
     }

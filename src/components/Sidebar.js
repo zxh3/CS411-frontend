@@ -5,13 +5,11 @@ class Sidebar  extends Component{
     }
 
     handleClick = (e) => {
-        console.log(e.target.value);
         this.props.handleFilter(e.target.value);
     }
 
     render(){
         return(
-            // <div><p>random number : { Math.random() }</p></div>
             <div className="row">
                 <div className="input-field col s3">
                     <button className="btn-flat waves-effect waves-light" value="Chinese" onClick={this.handleClick}>Chinese</button>
