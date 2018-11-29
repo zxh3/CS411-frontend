@@ -9,42 +9,49 @@ class Collection extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(`[Collection.js]`);
-    console.log('prevProps: ', prevProps);
-    console.log('this.props: ', this.props);
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
 
     axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
-      .then(res0 => {
-        axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
-        .then(res => {
-          this.setState({
-            dishNames: res.data.result.map(x => x.dishName),
-            collectionName: res0.data.result[0].collectionName ? res0.data.result[0].collectionName : ''
-          });
-        }).catch(err => console.error(err));
-      }).catch(err => console.error(err));
-  }
+       .then(res => {
+         this.setState({
+           collectionName: res.data.result[0].collectionName ? res.data.result[0].collectionName : ''
+         });
+       })
+       .catch(err => console.error(err));
+
+     axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
+       .then(res => {
+         this.setState({
+           dishNames: res.data.result.map(x => x.dishName)
+         });
+       })
+       .catch(err => console.error(err));
+      }
 
   componentDidMount() {
     axios.get(`https://cs411-backend.herokuapp.com/collectionname/${this.props.collectionid}`)
-      .then(res0 => {
-        axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
-        .then(res => {
-          this.setState({
-            dishNames: res.data.result.map(x => x.dishName),
-            collectionName: res0.data.result[0].collectionName ? res0.data.result[0].collectionName : ''
-          });
-        }).catch(err => console.error(err));
-      }).catch(err => console.error(err));
+       .then(res => {
+         this.setState({
+           collectionName: res.data.result[0].collectionName ? res.data.result[0].collectionName : ''
+         });
+       })
+       .catch(err => console.error(err));
+
+     axios.get(`https://cs411-backend.herokuapp.com/collectiondish/${this.props.collectionid}`)
+       .then(res => {
+         this.setState({
+           dishNames: res.data.result.map(x => x.dishName)
+         });
+       })
+       .catch(err => console.error(err));
   }
 
   handleDelete = (dishName, collectionid) => {
     axios.post(`https://cs411-backend.herokuapp.com/deletecollectionitem`, {
       dishName, collectionid
-    }).then(_ => {
+    }).then(res => {
       this.setState(prevState => {
         return {
           dishNames: prevState.dishNames.filter(x => x !== dishName)

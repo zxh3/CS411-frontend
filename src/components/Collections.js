@@ -64,7 +64,6 @@ class Collections extends Component {
   }
 
   render() {
-    console.log(`[collections.js render()], this.props.collectionChange: ${this.props.collectionChange}`);
     let collections = this.state.collectionids.map((id) => {
       return (
         <Collection collectionChange={this.props.collectionChange} key={id} collectionid={id} handleDelete={this.handleDelete} />
