@@ -3,10 +3,10 @@ import axios from 'axios';
 import M from 'materialize-css';
 import StarRatingComponent from 'react-star-rating-component';
 
-class AddReview extends Component {
+class AddResReview extends Component {
   state = {
     reviewContent: "",
-    dishRating:0
+    resRating:0
   }
 
   handleChange = (e) => {
@@ -17,18 +17,17 @@ class AddReview extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let dishName = this.props.dishName;
+    let resName = this.props.resName;
     let reviewContent = this.state.reviewContent;
-    let dishRating = this.state.dishRating;
-
+    let resRating = this.state.resRating;
     if (this.state.reviewContent.length === 0) {
       M.toast({html: 'Fields cannot be empty'});
       return;
     } else {
-      axios.post('https://cs411-backend.herokuapp.com/addReview', {
-        dishName,
+      axios.post('https://cs411-backend.herokuapp.com/restaurants/addReview', {
+        resName,
         reviewContent,
-        dishRating
+        resRating
       })
         .then(res => {
           if (res.data.error) {
@@ -42,44 +41,45 @@ class AddReview extends Component {
     }
     this.setState({
         reviewContent: "",
-        dishRating:0
+        resRating:0
     });
   }
 
   onStarClick(nextValue, prevValue, name) {
-    this.setState({dishRating: nextValue});
+    this.setState({resRating: nextValue});
   }
 
   render() {
-    const { dishRating } = this.state.dishRating;
+    const { resRating } = this.state.resRating;
+    const rand = Math.floor(Math.random() * 1000);
     return (
       <div>
-        <a className="btn wave-effect wave-light modal-trigger" href="#modal2">add review</a>
+        <a className="btn-small modal-trigger" href={`#add${rand + this.props.resName}`}>add review</a>
 
-        <div id="modal2" className="modal">
+        <div id={`add${rand + this.props.resName}`} className="modal reviewRes">
           <div className="modal-content">
-            <h3 className="red-text text-lighten-2">Create a review:</h3>
+            <h3 className="red-text text-lighten-2" style={{fontSize:"20px", margin:"0%", marginBottom:"3%"}}>{this.props.resName}</h3>
             <div className="row">
               <form className="col s12" onSubmit={this.handleSubmit}>
 
                 <div className="row">
-                  <div className="input-field col s6">
+                  <span className="input-field col s6" style={{margin:"0%"}}>
                     <input id="reviewContent" type="text" onChange={this.handleChange} value={this.state.reviewContent} autoComplete="off" />
-                    <label htmlFor="reviewContent">content</label>
-                  </div>
+                    <label htmlFor="reviewContent">start reviews</label>
+                  </span>
                 </div>
 
                 <div className="row">
-                  <div className="input-field col s6">
-                  <div>
-                    <p>Rating: {dishRating}</p>
+                  <div className="input-field col s6" style={{margin:"0%"}}>
+                  <span>
+                    <span className="review">Rating:{resRating}</span>
                     <StarRatingComponent 
                     name="rate1" 
                     starCount={5}
-                    value={this.state.dishRating}
+                    value={this.state.resRating}
                     onStarClick={this.onStarClick.bind(this)}
                     />
-                  </div>
+                  </span>
                   </div>
                 </div>
 
@@ -94,4 +94,4 @@ class AddReview extends Component {
   }
 }
 
-export default AddReview;
+export default AddResReview;

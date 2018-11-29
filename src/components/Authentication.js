@@ -10,17 +10,18 @@ const loginResponse = (response, handle) => {
   console.log('response::');
   console.log(response);
   
-  if (!response) {
+  if (response.error) {
     handle();
     return;
   }
+
   let { name, email, imageUrl } = response.profileObj;
   console.log(name);
   console.log(email);
   console.log(imageUrl);
 
   const token = jwt.sign({
-    exp: Math.floor(Date.now() / 1000) + (60), // expire after 10secs
+    exp: Math.floor(Date.now() / 1000) + (12 * 60 * 60), // expire after 12 hours
     data: {
       name,
       email,

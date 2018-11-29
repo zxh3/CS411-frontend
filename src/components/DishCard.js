@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import DishCardReveal from './DishCardReveal';
-import AddReview from './AddReview';
+import AddDishReview from './AddDishReview';
 // import Review from './Review';
 // import ViewReview from './ViewReview';
 import axios from 'axios';
 import M from 'materialize-css';
+import StarRatingComponent from 'react-star-rating-component';
+
+
+import Auth from './Auth';
+import AddToCollection from './AddToCollection';
 import ViewReview from './ViewReview';
 
 class DishCard extends Component {
   state = {
     ingredients: [],
     restaurants: [],
+    email: '',
+    collections: [], // elem: {id: ___, name: ___}
     reviews: [],
     content : "",
     rating : "",
@@ -37,6 +44,18 @@ class DishCard extends Component {
       })
       .catch(err => console.error(err));
 
+    if (Auth.isUserAuthenticated()) {
+      let token = Auth.decodeToken();
+      let {email} = token.data;
+      axios.get(`https://cs411-backend.herokuapp.com/getallusercollection/${email}`)
+        .then(res => {
+          this.setState({
+            email: email,
+            collections: res.data.result
+          })
+        })
+        .catch(err => console.error(err));
+    }
       if (this.props.dishType){
         axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.dishType}`)
           .then(res => {
@@ -47,7 +66,7 @@ class DishCard extends Component {
           .catch(err => console.error(err));
       }
 
-      axios.get(`https://cs411-backend.herokuapp.com/reviews/${this.props.dishName}`)
+      axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
         .then(res => {
           console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           this.setState({
@@ -57,8 +76,12 @@ class DishCard extends Component {
           for (var i = 0; i < this.state.content.length; i++){
             let children = []
             children.push(
-                <div className="row" key={i}>
-                <div>Rating : {this.state.rating[i]}</div>
+              <div className="row" key={i}>
+                <StarRatingComponent 
+                name="rate2" 
+                editing={false}
+                starCount={5}
+                value={this.state.rating[i]}/>
                 <div>{this.state.content[i]}</div>
                 </div>)
             this.setState(state => ({
@@ -101,7 +124,13 @@ class DishCard extends Component {
 
           <div className="card-image">
             <img className="activator" src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?cs=srgb&dl=food-dinner-lunch-70497.jpg&fm=jpg" alt="food" />
-            <div className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></div>
+            {Auth.isUserAuthenticated() ? 
+              <div>
+                <button className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></button>
+              </div>
+               :
+              null
+              }
           </div>
 
           <div className="card-content">
@@ -118,13 +147,21 @@ class DishCard extends Component {
             </div>
 
             {ingredients}
-            <AddReview dishName={this.props.dishName}/>
 
-
-            <div className="row">
-                < ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
+            
+            
+            <div className="row" style={{marginTop: '5px'}}>
+              <div className="col s6"> 
+                <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
               </div>
-              
+              <div className="col s6"> 
+                <AddDishReview className="col s5" dishName={this.props.dishName}/>
+              </div>
+              <div className="col s2">
+                {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
+              </div>
+            </div>
+
           </div>
 
           <div className="card-reveal">
