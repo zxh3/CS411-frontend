@@ -47,7 +47,6 @@ class DishCard extends Component {
 
     axios.get(`https://cs411-backend.herokuapp.com/image/${this.props.dishName}`)
       .then(res => {
-        console.log(res.data.results[0].image)
         this.setState({
           image: res.data.results[0].image
         })
