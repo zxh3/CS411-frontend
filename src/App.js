@@ -8,6 +8,7 @@ import AddDish from './components/AddDish';
 import Sidebar from './components/Sidebar';
 import Authentication from './components/Authentication';
 import Collections from './components/Collections';
+import ViewRecommend from './ViewRecommend';
 
 
 // Import Materialize
@@ -72,12 +73,12 @@ class App extends Component {
           
           <ul id="slide-out" className="sidenav">
             <Authentication handleAuth={this.handleAuth} auth={this.props.auth} />
+            <ViewRecommend/>
           </ul>
           
 
           <AddDish />
           <SearchBar handleSearch={this.handleSearch} />
-
           <div className="row">
             <div className="input-field col s1 offset-s1">
               <Sidebar handleFilter={this.handleFilter}/>
