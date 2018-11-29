@@ -20,7 +20,6 @@ class DishCard extends Component {
     restaurants: [],
     email: '',
     collections: [], // elem: {id: ___, name: ___}
-    // reviews: [],
     content : "",
     rating : "",
     newName: "",
@@ -109,22 +108,6 @@ class DishCard extends Component {
             content: res.data.map(x => x.content),
             rating: res.data.map(x => x.rating)
           });
-          // let children = [];
-          // for (var i = 0; i < this.state.content.length; i++){
-          //   children.push(
-          //     <div className="row" key={i}>
-          //       <StarRatingComponent 
-          //         name="rate2" 
-          //         editing={false}
-          //         starCount={5}
-          //         value={this.state.rating[i]} />
-          //       <div>{this.state.content[i]}</div>
-          //     </div>
-          //   )
-          // }
-          // this.setState(state => ({
-          //   reviews: [...state.reviews, children]
-          // }));
         }).catch(err => console.error(err));
   }
 
@@ -199,18 +182,16 @@ class DishCard extends Component {
                 {Auth.isUserAuthenticated() ?
                   <React.Fragment>
                     <div className="row">
-                    <div className="col s6">
-                      <AddDishReview dishName={this.props.dishName} handleUpdateReview={this.handleUpdateReview} />
+                      <div className="col s6">
+                        <AddDishReview dishName={this.props.dishName} handleUpdateReview={this.handleUpdateReview} />
+                      </div>
+                      <div className="col s6">
+                        <Recommend dishName={this.props.dishName} />
+                      </div>
                     </div>
-                    <div className="col s6">
-                      <Recommend dishName={this.props.dishName} />
-                    </div>
-                    </div>
-                    <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
-
-                    
                   </React.Fragment>
                   : null}
+                  <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
               </div>
             </div>
 
