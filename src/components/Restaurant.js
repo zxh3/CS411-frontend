@@ -17,7 +17,6 @@ class Restaurant extends Component {
 
   componentDidMount() {
     M.AutoInit();
-    // console.log("resName: "+ this.props.resName);
     axios.get(`https://cs411-backend.herokuapp.com/dishes/restaurants/${this.props.resName}`)
       .then(res => {
         this.setState({
