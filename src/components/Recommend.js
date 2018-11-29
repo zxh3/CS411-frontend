@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
+import Auth from './Auth';
 
 class Recommend extends Component {
   state = {
@@ -9,37 +10,37 @@ class Recommend extends Component {
 
   handleRecommend = (e) => {
     e.preventDefault();
-    let email = this.state.email;
-    let dishName = this.props.dishName;
-    if (this.state.email.length === 0) {
-      M.toast({html: 'Fields cannot be empty'});
-      return;
-    } else {
-      console.log(email);
-      console.log(dishName);
-      axios.post('https://cs411-backend.herokuapp.com/recommend', {
-        email,
-        dishName
-      })
-        .then(res => {
-          if (res.data.error) {
-            // console.log(res.data.error);
-            M.toast({html: res.data.error});
-          } else {
-            M.toast({html: "Success!"});
-          }
+    if (Auth.isUserAuthenticated()) {
+      let token = Auth.decodeToken();
+      console.log(token.data.email);
+      let email = this.state.email;
+      let dishName = this.props.dishName;
+      let recommender = token.data.email;
+      if (this.state.email.length === 0) {
+        M.toast({html: 'Fields cannot be empty'});
+        return;
+      } else {
+        console.log(email);
+        console.log(dishName);
+        axios.post('https://cs411-backend.herokuapp.com/recommend', {
+          email,
+          dishName,
+          recommender
         })
-        .catch(err => console.error(err));
+          .then(res => {
+            if (res.data.error) {
+              // console.log(res.data.error);
+              M.toast({html: res.data.error});
+            } else {
+              M.toast({html: "Success!"});
+            }
+          })
+          .catch(err => console.error(err));
+      }
+      this.setState({
+          email: "",
+      });
     }
-    this.setState({
-        email: "",
-    });
-    // e.preventDefault();
-    // console.log(`RRRRRRRRRRRRRRRRRecommending ${this.props.dishName} to ${e}`);
-    // axios.post('https://cs411-backend.herokuapp.com/recommend', {
-    //  user_email: e,
-    //   dishName: this.props.dishName
-    // });
   }
 
   handleChange = (e) => {
