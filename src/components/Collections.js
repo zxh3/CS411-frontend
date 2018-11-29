@@ -39,7 +39,8 @@ class Collections extends Component {
         this.setState({
           collectionids: res.data.result.map(x => x.collectionid),
           newCollection: ''
-        })
+        });
+        this.props.handleCollectionAdd();
       })
       .catch(err => {
         console.error(err);

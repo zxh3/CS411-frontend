@@ -19,11 +19,18 @@ class App extends Component {
     searchedIngredient: "",
     auth: 0,
     filterType: "",
-    collectionChange: 0
+    collectionChange: 0,
+    collectionAdded: 0
+  }
+
+  handleCollectionAdd = () => {
+    console.log(`handleCollectionAdd: ${this.state.collectionAdded}`);
+    this.setState((prevState) => ({
+      collectionAdded: 1 - prevState.collectionAdded
+    }));
   }
 
   handleCollectionChange = () => {
-    console.log(`[handleCollectionChange]: ${this.state.collectionChange}`);
     this.setState((prevState) => ({
       collectionChange: 1 - prevState.collectionChange
     }));
@@ -60,7 +67,7 @@ class App extends Component {
     let authContent = (
       <div>
         <hr /><br />
-        <Collections collectionChange={this.state.collectionChange} />
+        <Collections handleCollectionAdd={this.handleCollectionAdd} collectionChange={this.state.collectionChange} />
       </div>
     );
     return (
@@ -81,7 +88,7 @@ class App extends Component {
               <Sidebar handleFilter={this.handleFilter}/>
             </div>
             <div className="input-field col s9">
-              <Dishes handleCollectionChange={this.handleCollectionChange} searchedIngredient={this.state.searchedIngredient} filterType={this.state.filterType}/>
+              <Dishes collectionAdded={this.state.collectionAdded} handleCollectionChange={this.handleCollectionChange} searchedIngredient={this.state.searchedIngredient} filterType={this.state.filterType}/>
             </div>
           </div>
 

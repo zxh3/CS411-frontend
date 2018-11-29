@@ -60,7 +60,7 @@ class Dishes extends Component {
   }
   
   render() {
-    const dishcards = this.state.dishNames.map(dn => <DishCard handleCollectionChange={this.props.handleCollectionChange} dishName={dn} key={dn} handleDelete={this.handleDelete} handleChangeDishName={this.handleChangeDishName} />)
+    const dishcards = this.state.dishNames.map(dn => <DishCard collectionAdded={this.props.collectionAdded} handleCollectionChange={this.props.handleCollectionChange} dishName={dn} key={dn} handleDelete={this.handleDelete} handleChangeDishName={this.handleChangeDishName} />)
     return (
       // <div className="container">
         <div className="row">

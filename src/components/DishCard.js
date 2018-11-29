@@ -42,13 +42,29 @@ class DishCard extends Component {
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
+    console.log('prevProps.collectionAdded: ', prevProps.collectionAdded);
+    console.log('this.props.collectionAdded: ', this.props.collectionAdded);
+
+    console.log('[[[UPDATE!!!]]]');
 
     axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
-    .then(res => {
-      this.setState({
-        content: res.data.map(x => x.content),
-        rating: res.data.map(x => x.rating)
-      });
+    .then(res0 => {
+
+      if (Auth.isUserAuthenticated()) {
+        let token = Auth.decodeToken();
+        let {email} = token.data;
+        axios.get(`https://cs411-backend.herokuapp.com/getallusercollection/${email}`)
+          .then(res => {
+            this.setState({
+              email: email,
+              collections: res.data.result,
+              content: res0.data.map(x => x.content),
+              rating: res0.data.map(x => x.rating)
+            })
+          })
+          .catch(err => console.error(err));
+      }
+
     }).catch(err => console.error(err));
   }
 
@@ -179,7 +195,7 @@ class DishCard extends Component {
 
             <div className="card-action">
               <div className="row">
-                
+
                 {Auth.isUserAuthenticated() ?
                   <React.Fragment>
                     <div className="row">
