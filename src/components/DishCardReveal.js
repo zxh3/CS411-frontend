@@ -48,7 +48,7 @@ class DishCardReveal extends Component {
   }
   
   render() {
-    let restaurants = <div><div className="res">{"<UNK>"}</div></div>
+    let restaurants = <div><div className="res">{"Available soon..."}</div></div>
     if (this.props.restaurants.length > 0) {
       restaurants = this.props.restaurants.map(restaurant => {
         return (
