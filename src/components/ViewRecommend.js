@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import M from 'materialize-css';
 import Auth from './Auth';
-import { isEqual } from 'lodash';
 
 class ViewRecommend  extends Component{
     state = {
