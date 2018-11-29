@@ -36,6 +36,7 @@ class AddDishReview extends Component {
             M.toast({html: res.data.error});
           } else {
             M.toast({html: "Success!"});
+            this.props.handleUpdateReview();
           }
         })
         .catch(err => console.error(err));
