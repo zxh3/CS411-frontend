@@ -23,7 +23,8 @@ class DishCard extends Component {
     rating : "",
     newName: "",
     types:[],
-    currDish: ""
+    currDish: "",
+    image:""
   }
 
   componentDidMount() {
@@ -44,6 +45,16 @@ class DishCard extends Component {
       })
       .catch(err => console.error(err));
 
+    axios.get(`https://cs411-backend.herokuapp.com/image/${this.props.dishName}`)
+      .then(res => {
+        console.log(res.data.results[0].image)
+        this.setState({
+          image: res.data.results[0].image
+        })
+      })
+      .catch(err => console.error(err));
+
+
     if (Auth.isUserAuthenticated()) {
       let token = Auth.decodeToken();
       let {email} = token.data;
@@ -56,6 +67,7 @@ class DishCard extends Component {
         })
         .catch(err => console.error(err));
     }
+
       if (this.props.dishType){
         axios.get(`https://cs411-backend.herokuapp.com/types/${this.props.dishType}`)
           .then(res => {
@@ -68,7 +80,6 @@ class DishCard extends Component {
 
       axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
         .then(res => {
-          console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           this.setState({
             content: res.data.map(x => x.content),
             rating: res.data.map(x=>x.rating)
@@ -123,7 +134,7 @@ class DishCard extends Component {
         <div className="card">
 
           <div className="card-image">
-            <img className="activator" src="https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?cs=srgb&dl=food-dinner-lunch-70497.jpg&fm=jpg" alt="food" />
+            <img className="activator" src={this.state.image} alt="food" />
             {Auth.isUserAuthenticated() ? 
               <div>
                 <button className="btn-floating halfway-fab waves-effect waves-light red" onClick={() => this.props.handleDelete(this.props.dishName)}><i className="material-icons">delete</i></button>

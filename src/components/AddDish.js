@@ -6,7 +6,8 @@ class AddDish extends Component {
   state = {
     dishName: "",
     ingredients: "",
-    dishType:""
+    dishType:"",
+    image:""
   }
 
   handleChange = (e) => {
@@ -20,15 +21,19 @@ class AddDish extends Component {
     let dishName = this.state.dishName;
     let ingredients = this.state.ingredients.split(',').map(x => x.trim());
     let dishType = this.state.dishType;
-
+    let image = this.state.image;
     if (dishName.length === 0 || this.state.ingredients.length === 0 || dishType.length === 0) {
       M.toast({html: 'Fields cannot be empty'});
       return;
     } else {
+      if(this.state.image.length === 0){
+        image = "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?cs=srgb&dl=food-dinner-lunch-70497.jpg&fm=jpg"
+      }
       axios.post('https://cs411-backend.herokuapp.com/addDish', {
         dishName,
         ingredients,
-        dishType
+        dishType, 
+        image
       })
         .then(res => {
           if (res.data.error) {
@@ -43,7 +48,8 @@ class AddDish extends Component {
     this.setState({
       dishName: "",
       ingredients: "",
-      dishType:""
+      dishType:"",
+      image:""
     });
   }
 
@@ -80,6 +86,14 @@ class AddDish extends Component {
                   <div className="input-field col s6">
                     <input id="dishType" type="text" onChange={this.handleChange} value={this.state.dishType} autoComplete="off" />
                     <label htmlFor="dishType">Cusine Type</label>
+                  </div>
+                </div>
+
+
+                 <div className="row">
+                  <div className="input-field col s6">
+                    <input id="image" type="text" onChange={this.handleChange} value={this.state.image} autoComplete="off" />
+                    <label htmlFor="image">Image url(optional)</label>
                   </div>
                 </div>
 
