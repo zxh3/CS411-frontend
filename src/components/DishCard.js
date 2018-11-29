@@ -80,6 +80,10 @@ class DishCard extends Component {
 
       axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
         .then(res => {
+<<<<<<< HEAD
+=======
+          // console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+>>>>>>> ea999f93dc59335f51c3b755a9e322a86e084339
           this.setState({
             content: res.data.map(x => x.content),
             rating: res.data.map(x=>x.rating)
@@ -98,7 +102,7 @@ class DishCard extends Component {
             this.setState(state => ({
               reviews: [...state.reviews, children]
             }))
-            console.log("test72: ", this.props.dishName, this.state.reviews)
+            // console.log("test72: ", this.props.dishName, this.state.reviews)
           }
         })
         .catch(err => console.error(err));
@@ -145,7 +149,11 @@ class DishCard extends Component {
           </div>
 
           <div className="card-content">
-            <div className="card-title"><a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a>{this.props.dishName}</div>
+            
+            <div className="card-title">
+              {Auth.isUserAuthenticated() ? <a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a> : null}
+              {this.props.dishName}
+            </div>
 
             <div id={this.props.dishName} className="modal">
               <div className="modal-content">
@@ -165,8 +173,9 @@ class DishCard extends Component {
               <div className="col s6"> 
                 <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
               </div>
+              
               <div className="col s6"> 
-                <AddDishReview className="col s5" dishName={this.props.dishName}/>
+                {Auth.isUserAuthenticated() ? <AddDishReview className="col s5" dishName={this.props.dishName}/> : null}
               </div>
               <div className="col s2">
                 {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
