@@ -56,8 +56,8 @@ class Collection extends Component {
         return {
           dishNames: prevState.dishNames.filter(x => x !== dishName)
         }
-      }).catch(err => console.error(err));
-    })
+      })
+    }).catch(err => console.error(err));
   }
 
   render() {
