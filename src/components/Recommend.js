@@ -53,7 +53,7 @@ class Recommend extends Component {
         <div>
 
             <div className="recommendbtn">
-            <div className="btn-small modal-trigger" href={`#rec${this.props.dishName}`}>Recommend</div>                
+              <div className="btn-small modal-trigger" href={`#rec${this.props.dishName}`}>Recommend</div>                
             </div>
 
             <div id={`rec${this.props.dishName}`} className="modal">
@@ -65,10 +65,8 @@ class Recommend extends Component {
                       <label htmlFor="email">Enter your friend's email here!</label>
                       <button className="btn">Submit</button>
                     </form>
-                    
                 </div>
             </div>
-
         </div>
     );
   }
