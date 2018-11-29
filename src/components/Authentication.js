@@ -51,7 +51,7 @@ class Authentication extends Component {
       let token = Auth.decodeToken();
       let { name, imageUrl } = token.data;
       thumbnail = (
-        <div className="row">
+        <div className="row" style={{marginRight: '10px'}}>
           <img src={imageUrl} alt="" className="col s3 circle"/>
           <span className="col s2">{name}</span>
           <button className="right btn-floating red" onClick={() => logout(this.props.handleAuth)}><i className="material-icons">close</i></button>
@@ -60,7 +60,7 @@ class Authentication extends Component {
     }
 
     return (
-      <div className="right" style={{marginTop: '10px', marginRight: '10px'}}>
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
         {thumbnail}
 
         {Auth.isUserAuthenticated() ? 
@@ -68,9 +68,6 @@ class Authentication extends Component {
           :
           <GoogleLogin
             clientId="1084995042542-k3p6cah91sk289dkkir6li03v52mj924.apps.googleusercontent.com"
-            render={renderProps => (
-              <button className="btn-floating green" onClick={renderProps.onClick}><i className="material-icons">check</i></button>
-            )}
             buttonText="Login"
             onSuccess={(response) => loginResponse(response, this.props.handleAuth)}
             onFailure={(response) => loginResponse(response, this.props.handleAuth)}

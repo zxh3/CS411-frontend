@@ -68,7 +68,13 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          <Authentication handleAuth={this.handleAuth} auth={this.props.auth} />
+
+          
+          <ul id="slide-out" className="sidenav">
+            <Authentication handleAuth={this.handleAuth} auth={this.props.auth} />
+          </ul>
+          
+
           <AddDish />
           <SearchBar handleSearch={this.handleSearch} />
 
@@ -81,8 +87,6 @@ class App extends Component {
             </div>
           </div>
 
-
-          
           {Auth.isUserAuthenticated() ? authContent : null}          
         </div>
       </BrowserRouter>
