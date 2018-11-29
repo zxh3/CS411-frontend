@@ -12,6 +12,7 @@ import StarRatingComponent from 'react-star-rating-component';
 import Auth from './Auth';
 import AddToCollection from './AddToCollection';
 import ViewReview from './ViewReview';
+import { isEqual } from 'lodash';
 
 class DishCard extends Component {
   state = {
@@ -19,13 +20,37 @@ class DishCard extends Component {
     restaurants: [],
     email: '',
     collections: [], // elem: {id: ___, name: ___}
-    reviews: [],
+    // reviews: [],
     content : "",
     rating : "",
     newName: "",
     types:[],
     currDish: "",
-    image:""
+    image:"",
+    update: 0
+  }
+
+  handleUpdateReview = () => {
+    console.log('update called');
+    this.setState(prevState => {
+      return {
+        update: 1 - prevState.update
+      }
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
+      return;
+    }
+
+    axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
+    .then(res => {
+      this.setState({
+        content: res.data.map(x => x.content),
+        rating: res.data.map(x => x.rating)
+      });
+    }).catch(err => console.error(err));
   }
 
   componentDidMount() {
@@ -82,25 +107,25 @@ class DishCard extends Component {
         .then(res => {
           this.setState({
             content: res.data.map(x => x.content),
-            rating: res.data.map(x=>x.rating)
+            rating: res.data.map(x => x.rating)
           });
-          for (var i = 0; i < this.state.content.length; i++){
-            let children = []
-            children.push(
-              <div className="row" key={i}>
-                <StarRatingComponent 
-                name="rate2" 
-                editing={false}
-                starCount={5}
-                value={this.state.rating[i]}/>
-                <div>{this.state.content[i]}</div>
-                </div>)
-            this.setState(state => ({
-              reviews: [...state.reviews, children]
-            }))
-          }
-        })
-        .catch(err => console.error(err));
+          // let children = [];
+          // for (var i = 0; i < this.state.content.length; i++){
+          //   children.push(
+          //     <div className="row" key={i}>
+          //       <StarRatingComponent 
+          //         name="rate2" 
+          //         editing={false}
+          //         starCount={5}
+          //         value={this.state.rating[i]} />
+          //       <div>{this.state.content[i]}</div>
+          //     </div>
+          //   )
+          // }
+          // this.setState(state => ({
+          //   reviews: [...state.reviews, children]
+          // }));
+        }).catch(err => console.error(err));
   }
 
   handleChange = (e) => {
@@ -126,6 +151,20 @@ class DishCard extends Component {
     let ingredients = <p>UNKNOWN</p>;
     if (this.state.ingredients.length > 0) {
       ingredients = <p>{this.state.ingredients.join(', ')}</p>
+    }
+
+    let children = [];
+    for (var i = 0; i < this.state.content.length; i++){
+      children.push(
+        <div className="row" key={i}>
+          <StarRatingComponent 
+            name="rate2" 
+            editing={false}
+            starCount={5}
+            value={this.state.rating[i]} />
+          <div>{this.state.content[i]}</div>
+        </div>
+      );
     }
 
     return (
@@ -161,13 +200,15 @@ class DishCard extends Component {
                   <React.Fragment>
                     <div className="row">
                     <div className="col s6">
-                      <AddDishReview dishName={this.props.dishName} />
+                      <AddDishReview dishName={this.props.dishName} handleUpdateReview={this.handleUpdateReview} />
                     </div>
                     <div className="col s6">
                       <Recommend dishName={this.props.dishName} />
                     </div>
                     </div>
-                    <ViewReview reviews={this.state.reviews} dishName={this.props.dishName} />
+                    <ViewReview reviews={children} dishName={this.props.dishName} update={this.state.update} />
+
+                    
                   </React.Fragment>
                   : null}
               </div>
