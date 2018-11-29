@@ -144,7 +144,10 @@ class DishCard extends Component {
           </div>
 
           <div className="card-content">
-            <div className="card-title"><a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a>{this.props.dishName}</div>
+            <div className="card-title">
+              {Auth.isUserAuthenticated() ? <a className="material-icons right modal-trigger red-text text-lighten-2" href={`#${this.props.dishName}`}>mode_edit</a> : null}
+              {this.props.dishName}
+            </div>
 
             <div id={this.props.dishName} className="modal">
               <div className="modal-content">
@@ -164,16 +167,21 @@ class DishCard extends Component {
               <div className="col s6"> 
                 <ViewReview reviews={this.state.reviews} dishName={this.props.dishName}/>
               </div>
-              <div className="col s6"> 
-                <AddDishReview className="col s5" dishName={this.props.dishName}/>
-              </div>
-              <div className="col s2 offset-s1">
-                {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
-              </div>
 
-              <div className="col s6"> 
-                <Recommend className="col s4" dishName={this.props.dishName}/>
-              </div>
+              {Auth.isUserAuthenticated() ? 
+                <div>
+                  <div className="col s6">
+                    <AddDishReview dishName={this.props.dishName} />
+                  </div>
+
+                  <div className="col s6">
+                    <Recommend dishName={this.props.dishName} />
+                  </div>
+
+                  <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections} />
+
+                </div> : null}
+              
             </div>
 
           </div>

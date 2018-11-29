@@ -10,7 +10,9 @@ class Restaurant extends Component {
     type: "",
     address: "",
     phoneNumber: "",
-    reviews: []
+    reviews: [],
+    content: [],
+    rating: []
   }
 
   componentDidMount() {

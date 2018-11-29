@@ -21,24 +21,17 @@ class Recommend extends Component {
   render() {
     return (
         <div>
-
-            <div className="recommendbtn">
-            <div className="btn-small modal-trigger" href="#modal-recommend">Recommend</div>                
-            </div>
-
+            <div className="btn-small modal-trigger" href="#modal-recommend">Recommend</div>
             <div id="modal-recommend" className="modal">
                 <div className="modal-content">
                     <h3 className="red-text text-lighten-2">Recommend this dish to your friend!</h3>
-
                     <form className="input-field" onSubmit={this.handleRecommend}>
                         <input id="user_email" type="text" onChange={this.handleChange}/>
                         <label htmlFor="user_email">Enter your friend's email here!</label>
                         <button className="btn">Submit</button>
                     </form>
-                    
                 </div>
             </div>
-
         </div>
     );
   }

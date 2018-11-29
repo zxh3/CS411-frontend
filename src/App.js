@@ -57,6 +57,13 @@ class App extends Component {
   }
 
   render() {
+    let authContent = (
+      <div>
+        <hr />
+        <br />
+        <Collections collectionChange={this.state.collectionChange} />
+      </div>
+    );
     return (
       <BrowserRouter>
         <div className="App">
@@ -74,8 +81,9 @@ class App extends Component {
             </div>
           </div>
 
-          <hr /><br />
-          {Auth.isUserAuthenticated() ? <Collections collectionChange={this.state.collectionChange} /> : null}          
+
+          
+          {Auth.isUserAuthenticated() ? authContent : null}          
         </div>
       </BrowserRouter>
     );
