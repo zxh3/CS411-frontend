@@ -24,7 +24,6 @@ class App extends Component {
   }
 
   handleCollectionAdd = () => {
-    console.log(`handleCollectionAdd: ${this.state.collectionAdded}`);
     this.setState((prevState) => ({
       collectionAdded: 1 - prevState.collectionAdded
     }));
@@ -48,7 +47,6 @@ class App extends Component {
   }
 
   handleAuth = () => {
-    console.log('[handleAuth] called');
     this.setState((state) => {
       return {
         auth: 1 - state.auth
@@ -75,11 +73,9 @@ class App extends Component {
         <div className="App">
           <Navbar />
 
-          
           <ul id="slide-out" className="sidenav">
             <Authentication handleAuth={this.handleAuth} auth={this.props.auth} />
           </ul>
-          
 
           <AddDish />
           <SearchBar handleSearch={this.handleSearch} />

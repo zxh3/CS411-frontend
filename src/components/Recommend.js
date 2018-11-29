@@ -12,7 +12,7 @@ class Recommend extends Component {
     e.preventDefault();
     if (Auth.isUserAuthenticated()) {
       let token = Auth.decodeToken();
-      console.log(token.data.email);
+      // console.log(token.data.email);
       let email = this.state.email;
       let dishName = this.props.dishName;
       let recommender = token.data.email;
@@ -20,8 +20,8 @@ class Recommend extends Component {
         M.toast({html: 'Fields cannot be empty'});
         return;
       } else {
-        console.log(email);
-        console.log(dishName);
+        // console.log(email);
+        // console.log(dishName);
         axios.post('https://cs411-backend.herokuapp.com/recommend', {
           email,
           dishName,

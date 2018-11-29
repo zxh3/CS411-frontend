@@ -30,7 +30,6 @@ class DishCard extends Component {
   }
 
   handleUpdateReview = () => {
-    console.log('update called');
     this.setState(prevState => {
       return {
         update: 1 - prevState.update
@@ -42,11 +41,6 @@ class DishCard extends Component {
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }
-    console.log('prevProps.collectionAdded: ', prevProps.collectionAdded);
-    console.log('this.props.collectionAdded: ', this.props.collectionAdded);
-
-    console.log('[[[UPDATE!!!]]]');
-
     axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
     .then(res0 => {
 
@@ -64,7 +58,6 @@ class DishCard extends Component {
           })
           .catch(err => console.error(err));
       }
-
     }).catch(err => console.error(err));
   }
 

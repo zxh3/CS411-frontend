@@ -9,9 +9,9 @@ class Collection extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    console.log(`[Collection.js]`);
-    console.log('prevProps: ', prevProps);
-    console.log('this.props: ', this.props);
+    // console.log(`[Collection.js]`);
+    // console.log('prevProps: ', prevProps);
+    // console.log('this.props: ', this.props);
     if (isEqual(prevProps, this.props) && isEqual(prevState, this.state)) {
       return;
     }

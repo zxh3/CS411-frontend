@@ -15,7 +15,7 @@ class ViewRecommend  extends Component{
         M.AutoInit();
         if (Auth.isUserAuthenticated()) {
             let token = Auth.decodeToken();
-            console.log(token.data.email);
+            // console.log(token.data.email);
  
             axios.get(`https://cs411-backend.herokuapp.com/recommend/${token.data.email}`)
             .then(res => {
@@ -31,7 +31,7 @@ class ViewRecommend  extends Component{
 
 
     getRecommendations = (e) =>  {
-        console.log(this.state.email);
+        // console.log(this.state.email);
         axios.get(`https://cs411-backend.herokuapp.com/recommend/${this.state.email}`)
         .then(res => {
           this.setState({
@@ -52,7 +52,7 @@ class ViewRecommend  extends Component{
                 </div>);
         }
         let recommends = <tr><td className="recommend">no recommendations</td></tr>
-        console.log("recommends:" + recommendations);
+        // console.log("recommends:" + recommendations);
         if (recommendations.length > 0) {
           recommends = recommendations.map(recommend => {
             return (
