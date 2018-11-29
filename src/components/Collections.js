@@ -15,7 +15,7 @@ class Collections extends Component {
 
     axios.delete(`https://cs411-backend.herokuapp.com/deletecollection/${collectionid}`)
       .then(_ => {
-        this.setState({collectionids: newids});    
+        this.setState({collectionids: newids});
       })
       .catch(err => console.error(err));
   }

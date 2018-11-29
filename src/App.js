@@ -74,6 +74,7 @@ class App extends Component {
             </div>
           </div>
 
+          <hr /><br />
           {Auth.isUserAuthenticated() ? <Collections collectionChange={this.state.collectionChange} /> : null}          
         </div>
       </BrowserRouter>

@@ -68,7 +68,6 @@ class DishCard extends Component {
 
       axios.get(`https://cs411-backend.herokuapp.com/reviews/dishes/${this.props.dishName}`)
         .then(res => {
-          // console.log("test!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
           this.setState({
             content: res.data.map(x => x.content),
             rating: res.data.map(x=>x.rating)
@@ -87,7 +86,6 @@ class DishCard extends Component {
             this.setState(state => ({
               reviews: [...state.reviews, children]
             }))
-            // console.log("test72: ", this.props.dishName, this.state.reviews)
           }
         })
         .catch(err => console.error(err));
@@ -162,7 +160,7 @@ class DishCard extends Component {
               <div className="col s6"> 
                 {Auth.isUserAuthenticated() ? <AddDishReview className="col s5" dishName={this.props.dishName}/> : null}
               </div>
-              <div className="col s2">
+              <div className="col s2 offset-s1">
                 {Auth.isUserAuthenticated() ? <AddToCollection handleCollectionChange={this.props.handleCollectionChange} dishName={this.props.dishName} collections={this.state.collections}/> : null}
               </div>
             </div>

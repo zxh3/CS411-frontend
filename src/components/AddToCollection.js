@@ -26,7 +26,7 @@ class AddToCollection extends Component {
 
     return (
       <div>
-        <div className="dropdown-trigger right btn-floating waves-effect waves-light red lighten-2" data-target={`dropdown${this.props.dishName}`}><i className="material-icons">favorite</i></div>
+        <div className="halfway-fab dropdown-trigger right btn-floating waves-effect waves-light red lighten-2" data-target={`dropdown${this.props.dishName}`}><i className="material-icons">favorite</i></div>
         <ul id={`dropdown${this.props.dishName}`} className='dropdown-content'>
           {collections}
         </ul>
